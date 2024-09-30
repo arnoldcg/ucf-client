@@ -1,9 +1,7 @@
 package com.iqsa.ucf.rest.controller;
 
 import com.iqsa.ucf.rest.model.to.DocumentTO;
-import com.iqsa.ucf.rest.model.to.UserTO;
 import com.iqsa.ucf.rest.service.DocumentService;
-import com.iqsa.ucf.rest.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -110,7 +108,8 @@ public class DocumentController {
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "This endpoint will update a document inside the database. " +
+                            description = "This endpoint will update a document metadata inside the database. " +
+                                    "The password and the owner are not modifiable fields. " +
                                     "This operation is restricted to specific user with specific role",
                             content = {
                                     @Content(mediaType = "application/json",

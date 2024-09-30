@@ -3,11 +3,14 @@ package com.iqsa.ucf.rest.service.impl;
 import com.iqsa.ucf.rest.dao.DocumentDAO;
 import com.iqsa.ucf.rest.dao.UserDAO;
 import com.iqsa.ucf.rest.model.entity.DocumentModel;
+import com.iqsa.ucf.rest.model.entity.UserModel;
 import com.iqsa.ucf.rest.model.to.DocumentTO;
 import com.iqsa.ucf.rest.service.DocumentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 import static com.iqsa.ucf.rest.mappers.DocumentMapper.DOCUMENT_MAPPER;
 
@@ -38,15 +41,34 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public DocumentTO createDocument(DocumentTO documentTO) {
-        var featureModel = DOCUMENT_MAPPER.bind(documentTO);
-        return DOCUMENT_MAPPER.bind(featureModel);
+
+        UserModel owner = null;
+        if (!Objects.isNull(documentTO.getId_user())) {
+            var userOpt = this.userDAO.findById(documentTO.getId_user());
+            if (userOpt.isEmpty()) {
+                var messageText = "User with id: %s not found on database";
+                var message = String.format(messageText, documentTO.getId_user());
+                throw new RuntimeException(message);
+            }
+
+            owner = userOpt.get();
+        } else {
+            var messageText = "User not specified for this document. An owner need to be defined";
+            throw new RuntimeException(messageText);
+        }
+
+        var documentModel = DOCUMENT_MAPPER.bind(documentTO);
+        documentModel.setUser(owner);
+        documentModel = this.documentDAO.save(documentModel);
+        return DOCUMENT_MAPPER.bind(documentModel);
     }
 
     @Override
-    public DocumentTO updateDocument(DocumentTO featureTO, Integer id) {
-        var documentById = this.getDocumentById(id);
-        DOCUMENT_MAPPER.updateDocument(documentById, featureTO);
-        return DOCUMENT_MAPPER.bind(documentById);
+    public DocumentTO updateDocument(DocumentTO documentTO, Integer id) {
+        var documentModel = this.getDocumentById(id);
+        DOCUMENT_MAPPER.updateDocument(documentModel, documentTO);
+        this.documentDAO.save(documentModel);
+        return DOCUMENT_MAPPER.bind(documentModel);
     }
 
     @Override

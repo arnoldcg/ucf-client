@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 @Entity(name = "document")
 @Table(name = "document", schema = "public")
@@ -39,8 +40,9 @@ public class DocumentModel {
     private String password;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserModel.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserModel.class)
     @JoinColumn(name = "id_user")
+    @NotAudited
     private UserModel user;
 
     public String toString() {

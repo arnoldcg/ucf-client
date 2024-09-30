@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class UserModel {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = CompanyModel.class)
     @JoinColumn(name = "id_company")
+    @NotAudited
     private CompanyModel company;
 
     @JsonIgnore

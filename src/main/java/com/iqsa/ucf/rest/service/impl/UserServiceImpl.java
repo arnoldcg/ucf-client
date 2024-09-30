@@ -74,7 +74,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean deleteUser(Integer id) {
-        this.userDAO.deleteById(id);
+        var entity = this.getUserById(id);
+        this.userDAO.delete(entity);
         return true;
     }
 
