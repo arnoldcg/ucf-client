@@ -58,7 +58,7 @@ public class DocumentServiceImpl implements DocumentService {
     private DocumentModel getDocumentById(Integer id) {
         var featureOpt = this.documentDAO.findById(id);
         if (featureOpt.isEmpty()) {
-            var messageText = "User with id: %s not found on database";
+            var messageText = "Document with id: %s not found on database";
             var message = String.format(messageText, id);
             throw new RuntimeException(message);
         }

@@ -40,9 +40,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserTO createUser(UserTO featureTO) {
-        var featureModel = USER_MAPPER.bind(featureTO);
-        var companyOpt = this.companyDAO.findById(featureTO.getId_company());
+    public UserTO createUser(UserTO userTO) {
+        var featureModel = USER_MAPPER.bind(userTO);
+        var companyOpt = this.companyDAO.findById(userTO.getId_company());
 
         if (companyOpt.isEmpty()) {
             throw new EntityNotFoundException("Company not found");
@@ -54,12 +54,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserTO updateUser(UserTO featureTO, Integer id) {
-        var featureModel = this.getUserById(id);
+    public UserTO updateUser(UserTO userTO, Integer id) {
+        var userById = this.getUserById(id);
         CompanyModel newCompany = null;
 
-        if (!Objects.isNull(featureTO.getId_company())) {
-            var companyOpt = this.companyDAO.findById(featureTO.getId_company());
+        if (!Objects.isNull(userTO.getId_company())) {
+            var companyOpt = this.companyDAO.findById(userTO.getId_company());
 
             if (companyOpt.isEmpty()) {
                 throw new EntityNotFoundException("Company not found");
@@ -67,9 +67,9 @@ public class UserServiceImpl implements UserService {
             newCompany = companyOpt.get();
         }
 
-        USER_MAPPER.updateUser(featureModel, featureTO, newCompany);
-        featureModel = this.userDAO.save(featureModel);
-        return USER_MAPPER.bindWithCompanyData(featureModel);
+        USER_MAPPER.updateUser(userById, userTO, newCompany);
+        userById = this.userDAO.save(userById);
+        return USER_MAPPER.bindWithCompanyData(userById);
     }
 
     @Override
@@ -79,13 +79,13 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserModel getUserById(Integer id) {
-        var featureOpt = this.userDAO.findById(id);
-        if (featureOpt.isEmpty()) {
+        var userDAOById = this.userDAO.findById(id);
+        if (userDAOById.isEmpty()) {
             var messageText = "User with id: %s not found on database";
             var message = String.format(messageText, id);
             throw new RuntimeException(message);
         }
 
-        return featureOpt.get();
+        return userDAOById.get();
     }
 }
