@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: dev-ms-ucf
+  datasource:
+    username: postgres
+    password: 123
+    url: jdbc:postgresql://translator_db:5432/ucf
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
+    default-schema: public
+    user: postgres
+    password: 123
+  session:
+    jdbc:
+      initialize-schema: always
+    store-type: jdbc
+  jpa:
+    properties:
+      hibernate.id.db_structure_naming_strategy: legacy
+    hibernate:
+      ddl-auto: update
+  data:
+    jpa:
+      repositories:
+        enabled: true
+server:
+  port: 8080
+  servlet:
+    context-path: /${spring.application.name}
+logging:
+  file:
+    name: /logs/ms-ucf.log

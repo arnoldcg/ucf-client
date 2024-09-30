@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: dev-ms-ucf
+  datasource:
+    username: postgres
+    password: 123
+    url: jdbc:postgresql://localhost:5432/ucf
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
+    default-schema: public
+    user: postgres
+    password: 123
+  session:
+    jdbc:
+      initialize-schema: always
+    store-type: jdbc
+springdoc:
+  api-docs:
+    path: /api-docs
+    version: openapi_3_0
+  swagger-ui:
+    path: /swagger-ui
+    doc-expansion: none
+  show-login-endpoint: true
+
+
+# Enable this feature to see the sql code behind scenes
+#  jpa:
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#  data:
+#    jpa:
+#      repositories:
+#        enabled: true
+server:
+  port: 8888
+  servlet:
+    context-path: /${spring.application.name}
+logging:
+  file:
+    name: /logs/ms-ucf.log
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+        SQL: DEBUG

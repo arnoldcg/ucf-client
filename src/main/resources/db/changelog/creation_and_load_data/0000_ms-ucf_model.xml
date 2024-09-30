@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="00000-ms-ucf" author="Arnold Castroman Garcia">
+        <sql>
+
+            CREATE SEQUENCE IF NOT EXISTS company_id_company_seq AS integer;
+            CREATE TABLE IF NOT EXISTS "public"."company" (
+                                            id_company integer NOT NULL DEFAULT nextval('company_id_company_seq'),
+                                            name varchar NULL,
+                                            description varchar NULL,
+                                            CONSTRAINT company_pk PRIMARY KEY (id_company)
+            );
+
+            CREATE SEQUENCE IF NOT EXISTS user_id_user_seq AS integer;
+            CREATE TABLE IF NOT EXISTS "public"."user" (
+                                         id_user integer NOT NULL DEFAULT nextval('user_id_user_seq'),
+                                         "name" varchar NULL,
+                                         password varchar NULL,
+                                         "role" varchar NULL,
+                                         id_company integer NOT NULL,
+                                         CONSTRAINT user_pk PRIMARY KEY (id_user)
+            );
+
+            ALTER TABLE "public"."user" ADD CONSTRAINT user_company_fk FOREIGN KEY (id_company) REFERENCES "public"."company"(id_company);
+            CREATE SEQUENCE IF NOT EXISTS "public"."hibernate_sequence";
+        </sql>
+    </changeSet>
+</databaseChangeLog>
