@@ -39,7 +39,7 @@ public class DocumentModel {
     private String password;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserModel.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserModel.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private UserModel user;
 

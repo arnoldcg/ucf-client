@@ -1,6 +1,8 @@
 package com.iqsa.ucf.rest.controller;
 
+import com.iqsa.ucf.rest.model.to.DocumentTO;
 import com.iqsa.ucf.rest.model.to.UserTO;
+import com.iqsa.ucf.rest.service.DocumentService;
 import com.iqsa.ucf.rest.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/document")
 public class DocumentController {
 
-    private final UserService userService;
+    private final DocumentService documentService;
 
-    public DocumentController(UserService userService) {
-        this.userService = userService;
+    public DocumentController(DocumentService documentService) {
+        this.documentService = documentService;
     }
 
     @Operation(summary = "Get all documents")
@@ -31,7 +33,7 @@ public class DocumentController {
                             description = "All the documents are returned",
                             content = {
                                     @Content(mediaType = "application/json",
-                                            schema = @Schema(implementation = UserTO.class)
+                                            schema = @Schema(implementation = DocumentTO.class)
                                     )
                             }
                     ),
@@ -45,8 +47,8 @@ public class DocumentController {
             }
     )
     @GetMapping(value = "/all")
-    public Page<UserTO> getAll(@PageableDefault(value = 20, sort = "id") Pageable pageable) {
-        return this.userService.getAll(pageable);
+    public Page<DocumentTO> getAll(@PageableDefault(value = 20, sort = "id") Pageable pageable) {
+        return this.documentService.getAll(pageable);
     }
 
     @Operation(summary = "Return the specific document")
@@ -57,7 +59,7 @@ public class DocumentController {
                             description = "This endpoint will return a document based on the id.",
                             content = {
                                     @Content(mediaType = "application/json",
-                                            schema = @Schema(implementation = UserTO.class)
+                                            schema = @Schema(implementation = DocumentTO.class)
                                     )
                             }
                     ),
@@ -71,8 +73,8 @@ public class DocumentController {
             }
     )
     @GetMapping(value = "/{id}")
-    public UserTO getById(@PathVariable("id") Integer id) {
-        return this.userService.getById(id);
+    public DocumentTO getById(@PathVariable("id") Integer id) {
+        return this.documentService.getById(id);
     }
 
     @Operation(summary = "Add a document. The user need to be previously created.")
@@ -84,7 +86,7 @@ public class DocumentController {
                                     "This operation is restricted to specific user with specific role",
                             content = {
                                     @Content(mediaType = "application/json",
-                                            schema = @Schema(implementation = UserTO.class)
+                                            schema = @Schema(implementation = DocumentTO.class)
                                     )
                             }
                     ),
@@ -99,8 +101,8 @@ public class DocumentController {
     )
     @PostMapping
     @PreAuthorize(value = "hasAnyRole('USER','ADMIN')")
-    public UserTO createUser(@RequestBody UserTO userTO) {
-        return this.userService.createUser(userTO);
+    public DocumentTO createDocument(@RequestBody DocumentTO documentTO) {
+        return this.documentService.createDocument(documentTO);
     }
 
     @Operation(summary = "Update a document")
@@ -112,7 +114,7 @@ public class DocumentController {
                                     "This operation is restricted to specific user with specific role",
                             content = {
                                     @Content(mediaType = "application/json",
-                                            schema = @Schema(implementation = UserTO.class)
+                                            schema = @Schema(implementation = DocumentTO.class)
                                     )
                             }
                     ),
@@ -127,8 +129,8 @@ public class DocumentController {
     )
     @PutMapping(value = "/{id}")
     @PreAuthorize(value = "hasAnyRole('USER','ADMIN')")
-    public UserTO updateUser(@RequestBody UserTO userTO, @PathVariable("id") Integer id) {
-        return this.userService.updateUser(userTO, id);
+    public DocumentTO updateUser(@RequestBody DocumentTO documentTO, @PathVariable("id") Integer id) {
+        return this.documentService.updateDocument(documentTO, id);
     }
 
     @Operation(summary = "Delete a document")
@@ -140,7 +142,7 @@ public class DocumentController {
                                     "This operation is restricted to specific user with specific role",
                             content = {
                                     @Content(mediaType = "application/json",
-                                            schema = @Schema(implementation = UserTO.class)
+                                            schema = @Schema(implementation = DocumentTO.class)
                                     )
                             }
                     ),
@@ -156,6 +158,6 @@ public class DocumentController {
     @DeleteMapping(value = "/{id}")
     @PreAuthorize(value = "hasAnyRole('USER','ADMIN')")
     public Boolean deleteUser(@PathVariable("id") Integer id) {
-        return this.userService.deleteUser(id);
+        return this.documentService.deleteDocument(id);
     }
 }
