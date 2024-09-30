@@ -4,12 +4,14 @@ import com.google.common.base.Strings;
 import com.iqsa.ucf.rest.model.entity.CompanyModel;
 import com.iqsa.ucf.rest.model.entity.UserModel;
 import com.iqsa.ucf.rest.model.to.CompanyTO;
+import com.iqsa.ucf.rest.model.to.DocumentTO;
 import com.iqsa.ucf.rest.model.to.UserTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Mapper
@@ -19,6 +21,7 @@ public interface UserMapper {
 
     @Mapping(expression = "java(model.getCompany().getId())", target = "id_company")
     @Mapping(target = "company", ignore = true)
+    @Mapping(target = "documents", ignore = true)
     UserTO bind(UserModel model);
 
     UserModel bind(UserTO model);
@@ -32,7 +35,22 @@ public interface UserMapper {
                 .description(temp.getDescription())
                 .build();
 
+        var documentSummary = new ArrayList<DocumentTO>();
+
+        if(Objects.nonNull(model.getDocuments()) && !model.getDocuments().isEmpty()) {
+            model.getDocuments().forEach(d -> {
+               var tempDocument = DocumentTO.builder()
+                       .id(d.getId())
+                       .title(d.getTitle())
+                       .description(d.getDescription())
+                       .build();
+
+               documentSummary.add(tempDocument);
+            });
+        }
+
         result.setCompany(tempCompanyInfo);
+        result.setDocuments(documentSummary);
         return result;
     }
 

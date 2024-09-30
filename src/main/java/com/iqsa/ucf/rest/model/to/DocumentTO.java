@@ -8,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
-import java.util.List;
-
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
@@ -17,18 +15,10 @@ import java.util.List;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserTO {
+public class DocumentTO {
     private Integer id;
-
-    private String name;
-
+    private String title;
+    private String description;
     private String password;
-
-    private String role;
-
-    private Integer id_company;
-
-    private CompanyTO company;
-
-    private List<DocumentTO> documents;
+    private Integer id_user;
 }
