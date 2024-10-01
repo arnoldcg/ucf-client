@@ -11,10 +11,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -140,6 +142,43 @@ public class DocumentController {
         metadataObj.setAbsolutePath(absolutePath);
         metadataObj.setPassword(passwordHash);
         return this.documentService.createDocument(metadataObj);
+    }
+
+    @Operation(summary = "Download a document.")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "This endpoint will download a document that is living on the server",
+                            content = {
+                                    @Content(mediaType = "application/json",
+                                            schema = @Schema(implementation = DocumentTO.class)
+                                    )
+                            }
+                    ),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "The users doesn't has permissions to execute this operation",
+                            content = {
+                                    @Content()
+                            }
+                    ),
+            }
+    )
+    @GetMapping("/download")
+    @PreAuthorize(value = "hasAnyRole('USER','ADMIN')")
+    public Object downloadDocument(@RequestParam("id") Integer id, @RequestParam("password") String plainPassword) throws IOException {
+        var data = DocumentTO.builder()
+                .id(id)
+                .password(plainPassword)
+                .build();
+        var response = this.fileService.downloadDocument(data);
+        var length = (Long) response[0];
+        var resource = (ByteArrayResource) response[1];
+        return ResponseEntity.ok()
+                .contentLength(length)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
 
     @Operation(summary = "Update a document")

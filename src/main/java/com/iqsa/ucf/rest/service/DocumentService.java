@@ -4,6 +4,8 @@ import com.iqsa.ucf.rest.model.to.DocumentTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.io.File;
+
 public interface DocumentService {
     DocumentTO getById(Integer id);
 
