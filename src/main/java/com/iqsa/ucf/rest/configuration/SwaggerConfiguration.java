@@ -13,12 +13,12 @@ public class SwaggerConfiguration {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("UCF API")
-                        .description("UCF application")
+                .info(new Info().title("UCF_CLIENT API")
+                        .description("UCF_CLIENT application")
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("UCF Wiki Documentation <under construction>")
+                        .description("UCF_CLIENT Wiki Documentation <under construction>")
                         .url("<not-set>"));
     }
 }
