@@ -2,6 +2,7 @@ package com.iqsa.ucf.rest.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -30,14 +31,14 @@ public class BasicConfiguration {
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
         Logger logger = Logger.getAnonymousLogger();
         logger.info("Encoder is: " + passwordEncoder.encode("a9165173-3c38-4c71-b8db-a8152a61f2a3"));
-        UserDetails user = User.withUsername("translator")
+        UserDetails user = User.withUsername("user")
                 .password(passwordEncoder.encode("a9165173-3c38-4c71-b8db-a8152a61f2a3"))
-                .roles("USER")
+                .authorities("USER")
                 .build();
 
         UserDetails admin = User.withUsername("admin")
                 .password(passwordEncoder.encode("a9165173-3c38-4c71-b8db-a8152a61f2a3"))
-                .roles("USER", "ADMIN")
+                .authorities("USER", "ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(user, admin);
@@ -50,8 +51,9 @@ public class BasicConfiguration {
                 .cors(cors -> cors.configurationSource(this.corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/**").permitAll();
-                });
+                    authorize.requestMatchers("/**").hasAuthority("USER")
+                            .requestMatchers("/**").hasAuthority("ADMIN");
+                }).httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
@@ -63,7 +65,7 @@ public class BasicConfiguration {
         configuration.setAllowedMethods(singletonList("*"));
         configuration.setAllowedHeaders(singletonList("*"));
         //in case authentication is enabled this flag MUST be set, otherwise CORS requests will fail
-        configuration.setAllowCredentials(false);
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
