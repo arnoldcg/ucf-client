@@ -1,0 +1,636 @@
+{
+	"info": {
+		"_postman_id": "05e04018-e0aa-4f25-b2e0-382f7d11428f",
+		"name": "UCF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8697411"
+	},
+	"item": [
+		{
+			"name": "Company Controller",
+			"item": [
+				{
+					"name": "get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/company/all",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"company",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/company/3",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"company",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"company 1\",\r\n    \"description\": \"This is the first company\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/company",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Company with Users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Company 2\",\r\n    \"description\": \"This is a company with users\",\r\n    \"users\": [\r\n        {\"name\":\"Wilfredo Castroman\", \"password\":\"acg123\",\"role\":\"USER\"},\r\n        {\"name\":\"Daryl Perez\", \"password\":\"cus34\",\"role\":\"ADMIN\"},\r\n        {\"name\":\"Marieta Vazques\", \"password\":\"fesh45\",\"role\":\"USER\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/company/definition",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"company",
+								"definition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Comp Users Modified 22222\",\r\n    \"description\": \"This is a company with users\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/company/3",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"company",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Company",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Comp Users\",\r\n    \"description\": \"This is a company with users\",\r\n    \"users\": [\r\n        {\"name\":\"Arnold Castroman\", \"password\":\"acg123\",\"role\":\"USER\"},\r\n        {\"name\":\"Pedro Perez\", \"password\":\"cus34\",\"role\":\"ADMIN\"},\r\n        {\"name\":\"Julio Vazques\", \"password\":\"fesh45\",\"role\":\"USER\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/company/1",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"company",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Controller",
+			"item": [
+				{
+					"name": "get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/user/all",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/user/3",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Arnold Castroman\",\r\n    \"password\": \"plain_text\",\r\n    \"role\":\"USER\",\r\n    \"id_company\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/user",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Arnold Castroman\",\r\n    \"password\": \"plain_text_modified\",\r\n    \"role\":\"USER\",\r\n    \"id_company\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/user/11",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"user",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Arnold Castroman\",\r\n    \"password\": \"plain_text_modified\",\r\n    \"role\":\"USER\",\r\n    \"id_company\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/user/3",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Document Controller",
+			"item": [
+				{
+					"name": "get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/document/all",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"document",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/document/2",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"document",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload document",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Arnold/Desktop/dbeaver.ini"
+								},
+								{
+									"key": "metadata",
+									"value": "{\n    \"title\": \"Arnold Castroman Document\",\n    \"description\": \"This is a document related with the animals\",\n    \"password\":\"simple_password\",\n    \"id_user\": 3\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/document/upload",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"document",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/document/download?id=6&password=simple_password",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"document",
+								"download"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								},
+								{
+									"key": "password",
+									"value": "simple_password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update document metadata",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Arnold Castroman Document Modified\",\r\n    \"description\": \"This is a document related with the animals Modified\",\r\n    \"password\": \"simple_password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/document/1",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"document",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete document",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Arnold Castroman\",\r\n    \"password\": \"plain_text_modified\",\r\n    \"role\":\"USER\",\r\n    \"id_company\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/dev-ms-ucf/document/1",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev-ms-ucf",
+								"document",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client Proxy Controller",
+			"item": [
+				{
+					"name": "get All Companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port-client}}/dev-ms-ucf-client/proxy/companies",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port-client}}",
+							"path": [
+								"dev-ms-ucf-client",
+								"proxy",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port-client}}/dev-ms-ucf-client/proxy/users",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port-client}}",
+							"path": [
+								"dev-ms-ucf-client",
+								"proxy",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Documents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port-client}}/dev-ms-ucf-client/proxy/documents",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port-client}}",
+							"path": [
+								"dev-ms-ucf-client",
+								"proxy",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "a9165173-3c38-4c71-b8db-a8152a61f2a3",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "8888",
+			"type": "string"
+		},
+		{
+			"key": "protocol",
+			"value": "http",
+			"type": "string"
+		},
+		{
+			"key": "port-client",
+			"value": "8889",
+			"type": "default"
+		}
+	]
+}
