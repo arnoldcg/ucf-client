@@ -86,7 +86,7 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyModel getCompanyById(Integer id) {
         var companyOpt = this.companyDAO.findById(id);
         if (companyOpt.isEmpty()) {
-            var messageText = "Feature with id: %s not found on database";
+            var messageText = "Company with id: %s not found on database";
             var message = String.format(messageText, id);
             throw new RuntimeException(message);
         }

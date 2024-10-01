@@ -19,11 +19,25 @@
                                          "name" varchar NULL,
                                          password varchar NULL,
                                          "role" varchar NULL,
-                                         id_company integer NOT NULL,
+                                         id_company integer,
                                          CONSTRAINT user_pk PRIMARY KEY (id_user)
             );
 
             ALTER TABLE "public"."user" ADD CONSTRAINT user_company_fk FOREIGN KEY (id_company) REFERENCES "public"."company"(id_company);
+
+            CREATE SEQUENCE IF NOT EXISTS document_id_document_seq AS integer;
+            CREATE TABLE IF NOT EXISTS "public"."document" (
+                                            id_document integer NOT NULL DEFAULT nextval('document_id_document_seq'),
+                                            title varchar NULL,
+                                            description varchar NULL,
+                                            password varchar NULL,
+                                            absolutePath varchar NULL,
+                                            id_user integer,
+                                            CONSTRAINT document_pk PRIMARY KEY (id_document)
+                                            );
+
+            ALTER TABLE "public"."document" ADD CONSTRAINT document_user_fk FOREIGN KEY (id_user) REFERENCES "public"."user"(id_user);
+
             CREATE SEQUENCE IF NOT EXISTS "public"."hibernate_sequence";
         </sql>
     </changeSet>

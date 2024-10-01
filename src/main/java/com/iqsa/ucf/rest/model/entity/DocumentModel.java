@@ -12,10 +12,8 @@ import lombok.extern.jackson.Jacksonized;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
-import java.util.List;
-
-@Entity(name = "user")
-@Table(name = "user", schema = "public")
+@Entity(name = "document")
+@Table(name = "document", schema = "public")
 @SequenceGenerator(name = "hibernate_sequence",
         sequenceName = "hibernate_sequence",
         schema = "public")
@@ -25,32 +23,30 @@ import java.util.List;
 @NoArgsConstructor
 @Jacksonized
 @Audited
-public class UserModel {
+public class DocumentModel {
 
     @Id
-    @Column(name = "id_user", columnDefinition = "SERIAL")
+    @Column(name = "id_document", columnDefinition = "SERIAL")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "description")
+    private String description;
+
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
-    private String role;
+    @Column(name = "absolutePath")
+    private String absolutePath;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = CompanyModel.class)
-    @JoinColumn(name = "id_company")
-    @NotAudited
-    private CompanyModel company;
-
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = DocumentModel.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserModel.class)
     @JoinColumn(name = "id_user")
-    private List<DocumentModel> documents;
+    @NotAudited
+    private UserModel user;
 
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
