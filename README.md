@@ -20,3 +20,6 @@ docker-compose up
 2. Example url for dev environment  -- http://localhost:8889/dev-ms-ucf-client/swagger-ui/index.html
 
 **In the Postman Collection the authentication for the client is disabled so the code is adding the headers dynamically**
+
+# Important
+Please with Spring Boot use the dev profile
