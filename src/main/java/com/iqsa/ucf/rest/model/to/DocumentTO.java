@@ -20,5 +20,7 @@ public class DocumentTO {
     private String title;
     private String description;
     private String password;
+    private String absolutePath;
     private Integer id_user;
+
 }

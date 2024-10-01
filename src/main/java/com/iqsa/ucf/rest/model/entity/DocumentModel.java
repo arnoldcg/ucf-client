@@ -39,6 +39,9 @@ public class DocumentModel {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "absolutePath")
+    private String absolutePath;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserModel.class)
     @JoinColumn(name = "id_user")
